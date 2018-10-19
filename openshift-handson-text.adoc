@@ -1,0 +1,131 @@
+= OpenShiftデモ&ハンズオン
+
+== OpenShift Onlineの利用
+
+=== Webコンソールへのログイン
+
+* webブラウザにて、OpenShift Onlineのwelcomeメールに記載のあったURLへアクセス(おそらく以下のいずれか)
+----
+https://console.starter-us-east-1.openshift.com
+https://console.starter-us-west-1.openshift.com
+----
+※本書では便宜上、上側のURL(starter-us-east-1)を記載する。各自、適宜読み替えて使うこと。
+
+* 事前に申請したRed Hatアカウントとパスワードを入力
+
+=== CLIでのログイン(オプション)
+
+※CDKなどを導入して、ocコマンドを利用できる人向け
+----
+$ oc login https://console.starter-us-east-1.openshift.com
+Authentication required for https://console.starter-us-east-1.openshift.com:443 (openshift)
+Username: ktanaka@redhat.com
+Password: (パスワードを入力)
+Login successful.
+----
+
+=== プロジェクトの作成
+
+* Webコンソールの右上にある [+ Create Project]ボタンから、任意の名前のプロジェクトを作成(英小文字、数字、ダッシュ(-)のみが利用可能)
+* プロジェクト名はOpenShift Online (Free)上でユニークである必要があるので注意
+* (Free環境では)作成にしばらく時間がかかるので気長に待つこと
+* CLIからであれば、以下のコマンドを実行
+
+----
+$ oc new-project (プロジェクト名)
+Now using project "(プロジェクト名)" on server "https://console.starter-us-west-1.openshift.com:443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app centos/ruby-22-centos7~https://github.com/openshift/ruby-ex.git
+
+to build a new example application in Ruby.
+$
+----
+
+== 既存イメージのデプロイ
+
+=== プロジェクトにおいて既存イメージをデプロイしてみる
+
+* 作成したプロジェクトのOverview画面を開く
+* [Deploy Image]ボタンをクリック
+* [Image Name]のラジオボタンをクリックし、以下のイメージ名を入力
+----
+openshiftroadshow/parksmap-katacoda:1.0.0
+----
+※Docker Hub上に置いてある、parksmap-katacoda:1.0.0 というイメージを指定
+
+* 虫めがねボタンをクリック
+* [Deploy]ボタンをクリック
+
+=== デプロイ状況の確認
+
+* すぐに[Close]して、"Applications"→"Pods"を見てみる
+* Deploy用Podが起動し、さらに実際のPod (parksmap-katacoda-1-xxxx)が起動
+* "Overview"画面からparksmap-katacodaの詳細画面を開く(左端の">"クリック)
+* 画面右端の「1pod」と表示されている右側にある矢印のうち、上向きのものをクリック(1pod → 2podになるはず)
+* あらためて"Applications"→"Pods"で、稼動Podが2個になっている事を確認
+
+=== Routeの作成とアプリの動作確認
+
+* "Overview"にて parksmap-katacoda の詳細を表示させた状態で、"Create Route"をクリック
+* パラメータはデフォルトのままで良いので [Create]ボタンをクリック
+
+* 。。。
+
+=== 環境のクリーンアップ
+
+* プロジェクトdelete
+
+== シンプルなS2I体験
+
+=== github.com上でのソースリポジトリ準備
+
+=== S2Iによるphp-exampleアプリのビルド
+
+=== アプリケーションの動作確認
+
+
+
+== Webhook連携による自動ビルド
+
+=== php-exampleのデプロイメントコンフィグの設定確認
+
+=== github.com上のphp-exampleリポジトリの設定変更
+
+=== ソースコードの編集とコミット
+
+=== 自動ビルド状況の確認
+
+=== アプリの動作確認
+
+
+
+== デプロイ機能の確認
+
+=== デフォルト状態でのデプロイ確認
+
+=== デプロイストラテジーの変更(Rolling→Recreate)
+
+* DeploymentのconfigでEdit YAML
+* type: Rolling を type: Recreteに
+* rollingParams: のくだりを全消し
+
+=== Recreateストラテジーの確認
+
+
+
+== おまけ
+
+=== parksmap-katacodaのデプロイ
+
+=== nationalparks-katacodaをS2Iでデプロイ
+
+=== nationalparks-katacodaの編集
+
+
+
+
+
+
+
