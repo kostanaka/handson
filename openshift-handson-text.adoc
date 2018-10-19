@@ -1,14 +1,17 @@
+:toc: left
 = OpenShiftデモ&ハンズオン
+
+by K.Tanaka <ktanaka@redhat.com>
 
 == OpenShift Onlineの利用
 
 === Webコンソールへのログイン
 
 * webブラウザにて、OpenShift Onlineのwelcomeメールに記載のあったURLへアクセス(おそらく以下のいずれか)
-----
-https://console.starter-us-east-1.openshift.com
+====
+https://console.starter-us-east-1.openshift.com +
 https://console.starter-us-west-1.openshift.com
-----
+====
 ※本書では便宜上、上側のURL(starter-us-east-1)を記載する。各自、適宜読み替えて使うこと。
 
 * 事前に申請したRed Hatアカウントとパスワードを入力
@@ -62,70 +65,192 @@ openshiftroadshow/parksmap-katacoda:1.0.0
 
 * すぐに[Close]して、"Applications"→"Pods"を見てみる
 * Deploy用Podが起動し、さらに実際のPod (parksmap-katacoda-1-xxxx)が起動
+* 関連コンポーネントを見てみる
+  - "Applications" → "Deployments"
+  - "Applications" → "Services"
+  - "Builds" → "Images"
+
+=== 手動でのスケールアウト操作
+
 * "Overview"画面からparksmap-katacodaの詳細画面を開く(左端の">"クリック)
 * 画面右端の「1pod」と表示されている右側にある矢印のうち、上向きのものをクリック(1pod → 2podになるはず)
 * あらためて"Applications"→"Pods"で、稼動Podが2個になっている事を確認
+* "Resources" → "Quota" にて、Quota制限の状況を確認
+* 今度は下向き矢印をクリックして、2pod→1podに変更
+* 同様にPodの変動を確認
 
 === Routeの作成とアプリの動作確認
 
 * "Overview"にて parksmap-katacoda の詳細を表示させた状態で、"Create Route"をクリック
 * パラメータはデフォルトのままで良いので [Create]ボタンをクリック
 
-* 。。。
+* "Applications" → "Routes" にて、Routeが作成されていることを確認
+* (一呼吸置いてから)Hostnameのカラムにあるリンクをクリック
+  → Parksmapアプリ(Map Visualizer)が起動するとを確認
 
 === 環境のクリーンアップ
 
-* プロジェクトdelete
+* 左上のプロジェクト名をクリック→"View All Projects"
+* プロジェクト名の右端にあるメニューボタン("…"が90度回転したようなアイコン)をクリック→"Delete Project"
+* プロジェクト名の入力を求められるので、指示通りにタイプして"Delete"をクリック
+* 画面上で該当プロジェクトの表示が消えてから、あらためて"Create Project"する
+* ocコマンドが使えるならば、プロジェクト自体を消すのではなく、プロジェクト内の関連コンポーネントのみを削除することも容易
+----
+$ oc delete all --selector app=parksmap-katacoda
+deploymentconfig "parksmap-katacoda" deleted
+imagestream "parksmap-katacoda" deleted
+route "parksmap-katacoda" deleted
+pod "parksmap-katacoda-1-lms4m" deleted
+service "parksmap-katacoda" deleted
+$
+----
 
 == シンプルなS2I体験
 
 === github.com上でのソースリポジトリ準備
 
-=== S2Iによるphp-exampleアプリのビルド
+* GitHubへサインイン(右上のSign In → user/pass入力)
+====
+https://github.com
+====
+* 以下のURLへアクセス
+====
+https://github.com/kostanaka/php-example
+====
+* 右上にある"Fork"をクリックして、このリポジトリをフォーク
+* フォークしたリポジトリを確認
+----
+https://github.com/(あなたのアカウント名)/php-example
+----
+* 右上にある緑のボタン"Clone or download"をクリック→右端のcopyアイコンをクリックして、リポジトリのURLをコピーしておく
 
-=== アプリケーションの動作確認
+=== S2Iによるphp-exampleアプリのビルドと確認
 
-
+* OpenShift画面に戻り、"Catalog"をクリック
+* "Languages"→"PHP"→"PHP"をクリック→[Next]ボタン
+* Application Nameに"php-example"を入力
+* Git Repositoryに、先ほどコピーしたURLをペースト
+----
+https://github.com/(あたなのアカウント名)/php-example.git
+----
+* [Create]ボタン
+* "Applications"→"Pods" あるいは "Builds"→"Builds"→ php-example-1 → "View Log"あたりで、ビルド状況やログを確認
+* 自動で Route まで作成されていることを確認した後、外部公開用URLをクリック → "Hello world!"が表示されていれば成功(時間がかかる場合があります)
 
 == Webhook連携による自動ビルド
 
-=== php-exampleのデプロイメントコンフィグの設定確認
+=== php-exampleのビルドコンフィグの設定確認
+
+* "Builds"→"Builds"→php-example→"Cofiguration"タブ
+* Source Repo:が、自身のGitHub上のリポジトリを指していることを確認
+* GitHub Webhook URL:の内容をコピー(右端のCOPYアイコン)
 
 === github.com上のphp-exampleリポジトリの設定変更
 
+* Webブラウザにて、自身のphp-exampleリポジトリページを開く
+====
+https://github.com/(自身のアカウント名)/php-example
+====
+* 右上の"Settings"タブを開く
+* 左側のOptionsの中にある"Webhooks"をクリック
+* [Add webhook]をクリック
+* [Payload URL]へ、先ほどコピーしたWebhook URLをペースト
+* [Content type]を "application/json"へ変更
+* [Add webhook]をクリック
+
 === ソースコードの編集とコミット
+* 再び、自身のphp-exampleリポジトリページに戻る(左上の"php-example"をクリック、など)
+* index.phpをクリックして中身を表示
+* 右上の鉛筆アイコンをクリックして、編集モードに
+* 当たり障りの無いようにテキストを編集("Hello"を"Good-bye"にするとか..)
+* 一番下の[Commit changes]ボタンをクリック
 
 === 自動ビルド状況の確認
 
+* OpenShift画面に戻り、ビルドコンフィグまたはPod一覧画面を開く
+* ビルドが開始されていることを確認
+
 === アプリの動作確認
 
+* デプロイの完了を待って、公開URLへアクセス
+* 自身で編集した通りに、表示されるメッセージが変更されていることを確認
 
+== デプロイコンフィグの設定確認
 
-== デプロイ機能の確認
+* "Applications" → "Deployments" → php-example
+* "Configuration"タブ
+* Strategy:の設定が"Rolling"になっていることを確認
 
-=== デフォルト状態でのデプロイ確認
+=== デフォルト状態(Rolling)でのデプロイ処理確認
+
+* [Deploy]ボタンをクリック後、すぐに "Applications"→"Pods"へ
+* 以下の一連の動作を確認
+  - deploy処理用のPod起動
+  - 新Podの起動 (Creating → Running)
+  - 旧Podの終了 (Terminating → 画面から消滅)
+
+上記は、Podを2つ以上にした状態で実行するとわかりやすいです。
+CDK環境などで実行している方は、あらかじめPod数を増やした状態で実行して下さい。
+OpenShift Online (Free) ではquota制限のため、Podを2にした状態では再デプロイ処理が止まってしまうので注意が必要です。
 
 === デプロイストラテジーの変更(Rolling→Recreate)
 
-* DeploymentのconfigでEdit YAML
-* type: Rolling を type: Recreteに
-* rollingParams: のくだりを全消し
+* 再び"Applications"→"Deployments"→php-example→"Configuration"タブ
+* 右上の[Actions]から"Edit YAML"をクリック
+* "type: Rolling" を "type: Recreate"に変更し、その上にある"rollingParams:"〜"updatePeriodSeconds: 1" のブロックを全消し
+----
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    type: Recreate
+----
 
 === Recreateストラテジーの確認
 
+* Overviewから、php-exampleのPod数を2に増やす
+* "Applications"→"Deployments"→php-example
+* [Deploy]ボタンをクリック後、すぐに "Applications"→"Pods"へ
+* 以下の一連の動作を確認
+  - deploy処理用のPod起動
+  - 旧Pod(x2)の終了 (Terminating → 画面から消滅)
+  - 新Pod(x2)の起動 (Creating → Running)
 
+== おまけの演習
 
-== おまけ
+再び環境をクリーンアップして、以下の作業をやってみてください。
 
 === parksmap-katacodaのデプロイ
 
+以下のイメージを元にアプリケーションをデプロイして、外部からアクセス可能な状態にしてください
+----
+openshiftroadshow/parksmap-katacoda:1.0.0
+----
+
 === nationalparks-katacodaをS2Iでデプロイ
+
+以下のURLで公開されているリポジトリをfork後、
+CatalogにあるPythonのS2Iを使って、デプロイしてください
+====
+https://github.com/openshift-roadshow/nationalparks-katacoda
+====
+
+正常にデプロイが完了したら、事前に作成していたparksmap-katacodaアプリケーションのURLをアクセスします。地図上にNational Parksがプロットされていれば成功です。
+
+=== nationalparks-katacoda のデプロイ設定変更
+
+* 正常デプロイ後、デプロイストラテジーを Recreate に変更 (※OpenShift Onlineのリソース制限を回避するための作業)
+* GitHub上のリポジトリへのcommitで、nationalparks-katacodaが再ビルドされるように、Webhookを設定
 
 === nationalparks-katacodaの編集
 
+* nationalparks-katacodaリポジトリ内のnationalparks.json を編集し、先頭に以下の内容(1行)を追加してcommit
+----
+{ "countryCode": "JP", "countryName": "Japan", "coordinates": [ 34.6525,  135.5063], "name": "Osaka Tsutenkaku Tower", "toponymName": "Osaka Tsutenkaku Tower"}
+----
+* ビルド処理が動きだすことを確認
 
+=== 動作確認
 
+再び parksmap-katacoda アプリケーションのURLを開き、新世界あたりに表示ポイントが増えていたら成功
 
-
-
-
+(以上)
