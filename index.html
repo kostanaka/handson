@@ -431,53 +431,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_openshift_onlineの利用">OpenShift Onlineの利用</a>
-<ul class="sectlevel2">
-<li><a href="#_webコンソールへのログイン">Webコンソールへのログイン</a></li>
-<li><a href="#_cliでのログイン_オプション">CLIでのログイン(オプション)</a></li>
-<li><a href="#_プロジェクトの作成">プロジェクトの作成</a></li>
-</ul>
-</li>
-<li><a href="#_既存イメージのデプロイ">既存イメージのデプロイ</a>
-<ul class="sectlevel2">
-<li><a href="#_プロジェクトにおいて既存イメージをデプロイしてみる">プロジェクトにおいて既存イメージをデプロイしてみる</a></li>
-<li><a href="#_デプロイ状況の確認">デプロイ状況の確認</a></li>
-<li><a href="#_手動でのスケールアウト操作">手動でのスケールアウト操作</a></li>
-<li><a href="#_routeの作成とアプリの動作確認">Routeの作成とアプリの動作確認</a></li>
-<li><a href="#_環境のクリーンアップ">環境のクリーンアップ</a></li>
-</ul>
-</li>
-<li><a href="#_シンプルなs2i体験">シンプルなS2I体験</a>
-<ul class="sectlevel2">
-<li><a href="#_github_com上でのソースリポジトリ準備">github.com上でのソースリポジトリ準備</a></li>
-<li><a href="#_s2iによるphp_exampleアプリのビルドと確認">S2Iによるphp-exampleアプリのビルドと確認</a></li>
-</ul>
-</li>
-<li><a href="#_webhook連携による自動ビルド">Webhook連携による自動ビルド</a>
-<ul class="sectlevel2">
-<li><a href="#_php_exampleのビルドコンフィグの設定確認">php-exampleのビルドコンフィグの設定確認</a></li>
-<li><a href="#_github_com上のphp_exampleリポジトリの設定変更">github.com上のphp-exampleリポジトリの設定変更</a></li>
-<li><a href="#_ソースコードの編集とコミット">ソースコードの編集とコミット</a></li>
-<li><a href="#_自動ビルド状況の確認">自動ビルド状況の確認</a></li>
-<li><a href="#_アプリの動作確認">アプリの動作確認</a></li>
-</ul>
-</li>
-<li><a href="#_デプロイコンフィグの設定確認">デプロイコンフィグの設定確認</a>
-<ul class="sectlevel2">
-<li><a href="#_デフォルト状態_rolling_でのデプロイ処理確認">デフォルト状態(Rolling)でのデプロイ処理確認</a></li>
-<li><a href="#_デプロイストラテジーの変更_rolling_recreate">デプロイストラテジーの変更(Rolling→Recreate)</a></li>
-<li><a href="#_recreateストラテジーの確認">Recreateストラテジーの確認</a></li>
-</ul>
-</li>
-<li><a href="#_おまけの演習">おまけの演習</a>
-<ul class="sectlevel2">
-<li><a href="#_parksmap_katacodaのデプロイ">parksmap-katacodaのデプロイ</a></li>
-<li><a href="#_nationalparks_katacodaをs2iでデプロイ">nationalparks-katacodaをS2Iでデプロイ</a></li>
-<li><a href="#_nationalparks_katacoda_のデプロイ設定変更">nationalparks-katacoda のデプロイ設定変更</a></li>
-<li><a href="#_nationalparks_katacodaの編集">nationalparks-katacodaの編集</a></li>
-<li><a href="#_動作確認">動作確認</a></li>
-</ul>
-</li>
+<li><a href="#_openshift_onlineの利用">1. OpenShift Onlineの利用</a></li>
+<li><a href="#_既存イメージのデプロイ">2. 既存イメージのデプロイ</a></li>
+<li><a href="#_シンプルなs2i体験">3. シンプルなS2I体験</a></li>
+<li><a href="#_webhook連携による自動ビルド">4. Webhook連携による自動ビルド</a></li>
+<li><a href="#_デプロイコンフィグの設定確認">5. デプロイコンフィグの設定確認</a></li>
+<li><a href="#_おまけの演習">6. おまけの演習</a></li>
 </ul>
 </div>
 </div>
@@ -485,15 +444,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>by K.Tanaka &lt;<a href="mailto:ktanaka@redhat.com">ktanaka@redhat.com</a>&gt; / 2018.10.21 / Rev 1.0</p>
+<p>by K.Tanaka &lt;<a href="mailto:ktanaka@redhat.com">ktanaka@redhat.com</a>&gt; / 2018.10.21 / Rev 1.0.1</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_openshift_onlineの利用">OpenShift Onlineの利用</h2>
+<h2 id="_openshift_onlineの利用">1. OpenShift Onlineの利用</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_webコンソールへのログイン">Webコンソールへのログイン</h3>
+<h3 id="_webコンソールへのログイン">1.1. Webコンソールへのログイン</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -521,7 +480,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="_cliでのログイン_オプション">CLIでのログイン(オプション)</h3>
+<h3 id="_cliでのログイン_オプション">1.2. CLIでのログイン(オプション)</h3>
 <div class="paragraph">
 <p>※CDKなどを導入して、ocコマンドを利用できる人向け</p>
 </div>
@@ -536,7 +495,7 @@ Login successful.</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_プロジェクトの作成">プロジェクトの作成</h3>
+<h3 id="_プロジェクトの作成">1.3. プロジェクトの作成</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -570,10 +529,10 @@ $</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_既存イメージのデプロイ">既存イメージのデプロイ</h2>
+<h2 id="_既存イメージのデプロイ">2. 既存イメージのデプロイ</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_プロジェクトにおいて既存イメージをデプロイしてみる">プロジェクトにおいて既存イメージをデプロイしてみる</h3>
+<h3 id="_プロジェクトにおいて既存イメージをデプロイしてみる">2.1. プロジェクトにおいて既存イメージをデプロイしてみる</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -607,7 +566,7 @@ $</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_デプロイ状況の確認">デプロイ状況の確認</h3>
+<h3 id="_デプロイ状況の確認">2.2. デプロイ状況の確認</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -636,7 +595,7 @@ $</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_手動でのスケールアウト操作">手動でのスケールアウト操作</h3>
+<h3 id="_手動でのスケールアウト操作">2.3. 手動でのスケールアウト操作</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -661,7 +620,7 @@ $</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_routeの作成とアプリの動作確認">Routeの作成とアプリの動作確認</h3>
+<h3 id="_routeの作成とアプリの動作確認">2.4. Routeの作成とアプリの動作確認</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -681,7 +640,7 @@ $</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_環境のクリーンアップ">環境のクリーンアップ</h3>
+<h3 id="_環境のクリーンアップ">2.5. 環境のクリーンアップ</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -716,10 +675,10 @@ $</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_シンプルなs2i体験">シンプルなS2I体験</h2>
+<h2 id="_シンプルなs2i体験">3. シンプルなS2I体験</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_github_com上でのソースリポジトリ準備">github.com上でのソースリポジトリ準備</h3>
+<h3 id="_github_com上でのソースリポジトリ準備">3.1. github.com上でのソースリポジトリ準備</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -772,7 +731,7 @@ $</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_s2iによるphp_exampleアプリのビルドと確認">S2Iによるphp-exampleアプリのビルドと確認</h3>
+<h3 id="_s2iによるphp_exampleアプリのビルドと確認">3.2. S2Iによるphp-exampleアプリのビルドと確認</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -811,10 +770,10 @@ $</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_webhook連携による自動ビルド">Webhook連携による自動ビルド</h2>
+<h2 id="_webhook連携による自動ビルド">4. Webhook連携による自動ビルド</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_php_exampleのビルドコンフィグの設定確認">php-exampleのビルドコンフィグの設定確認</h3>
+<h3 id="_php_exampleのビルドコンフィグの設定確認">4.1. php-exampleのビルドコンフィグの設定確認</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -830,7 +789,7 @@ $</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_github_com上のphp_exampleリポジトリの設定変更">github.com上のphp-exampleリポジトリの設定変更</h3>
+<h3 id="_github_com上のphp_exampleリポジトリの設定変更">4.2. github.com上のphp-exampleリポジトリの設定変更</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -869,7 +828,7 @@ $</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ソースコードの編集とコミット">ソースコードの編集とコミット</h3>
+<h3 id="_ソースコードの編集とコミット">4.3. ソースコードの編集とコミット</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -891,7 +850,7 @@ $</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_自動ビルド状況の確認">自動ビルド状況の確認</h3>
+<h3 id="_自動ビルド状況の確認">4.4. 自動ビルド状況の確認</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -904,7 +863,7 @@ $</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_アプリの動作確認">アプリの動作確認</h3>
+<h3 id="_アプリの動作確認">4.5. アプリの動作確認</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -919,7 +878,7 @@ $</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_デプロイコンフィグの設定確認">デプロイコンフィグの設定確認</h2>
+<h2 id="_デプロイコンフィグの設定確認">5. デプロイコンフィグの設定確認</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -935,7 +894,7 @@ $</pre>
 </ul>
 </div>
 <div class="sect2">
-<h3 id="_デフォルト状態_rolling_でのデプロイ処理確認">デフォルト状態(Rolling)でのデプロイ処理確認</h3>
+<h3 id="_デフォルト状態_rolling_でのデプロイ処理確認">5.1. デフォルト状態(Rolling)でのデプロイ処理確認</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -966,7 +925,7 @@ OpenShift Online (Free) ではquota制限のため、Podを2にした状態で�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_デプロイストラテジーの変更_rolling_recreate">デプロイストラテジーの変更(Rolling→Recreate)</h3>
+<h3 id="_デプロイストラテジーの変更_rolling_recreate">5.2. デプロイストラテジーの変更(Rolling→Recreate)</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -990,7 +949,7 @@ OpenShift Online (Free) ではquota制限のため、Podを2にした状態で�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_recreateストラテジーの確認">Recreateストラテジーの確認</h3>
+<h3 id="_recreateストラテジーの確認">5.3. Recreateストラテジーの確認</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1024,13 +983,13 @@ OpenShift Online (Free) ではquota制限のため、Podを2にした状態で�
 </div>
 </div>
 <div class="sect1">
-<h2 id="_おまけの演習">おまけの演習</h2>
+<h2 id="_おまけの演習">6. おまけの演習</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>再び環境をクリーンアップして、以下の作業をやってみてください。</p>
 </div>
 <div class="sect2">
-<h3 id="_parksmap_katacodaのデプロイ">parksmap-katacodaのデプロイ</h3>
+<h3 id="_parksmap_katacodaのデプロイ">6.1. parksmap-katacodaのデプロイ</h3>
 <div class="paragraph">
 <p>以下のイメージを元にアプリケーションをデプロイして、外部からアクセス可能な状態にしてください</p>
 </div>
@@ -1041,7 +1000,7 @@ OpenShift Online (Free) ではquota制限のため、Podを2にした状態で�
 </div>
 </div>
 <div class="sect2">
-<h3 id="_nationalparks_katacodaをs2iでデプロイ">nationalparks-katacodaをS2Iでデプロイ</h3>
+<h3 id="_nationalparks_katacodaをs2iでデプロイ">6.2. nationalparks-katacodaをS2Iでデプロイ</h3>
 <div class="paragraph">
 <p>以下のURLで公開されているリポジトリをfork後、
 CatalogにあるPythonのS2Iを使って、デプロイしてください</p>
@@ -1058,7 +1017,7 @@ CatalogにあるPythonのS2Iを使って、デプロイしてください</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_nationalparks_katacoda_のデプロイ設定変更">nationalparks-katacoda のデプロイ設定変更</h3>
+<h3 id="_nationalparks_katacoda_のデプロイ設定変更">6.3. nationalparks-katacoda のデプロイ設定変更</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1071,7 +1030,7 @@ CatalogにあるPythonのS2Iを使って、デプロイしてください</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_nationalparks_katacodaの編集">nationalparks-katacodaの編集</h3>
+<h3 id="_nationalparks_katacodaの編集">6.4. nationalparks-katacodaの編集</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1093,7 +1052,7 @@ CatalogにあるPythonのS2Iを使って、デプロイしてください</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_動作確認">動作確認</h3>
+<h3 id="_動作確認">6.5. 動作確認</h3>
 <div class="paragraph">
 <p>再び parksmap-katacoda アプリケーションのURLを開き、新世界あたりに表示ポイントが増えていたら成功</p>
 </div>
@@ -1106,7 +1065,7 @@ CatalogにあるPythonのS2Iを使って、デプロイしてください</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-10-21 00:13:44 JST
+Last updated 2018-10-21 00:19:05 JST
 </div>
 </div>
 </body>
