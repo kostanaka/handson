@@ -1,7 +1,7 @@
 :toc: left
 = OpenShiftデモ&ハンズオン
 
-by K.Tanaka <ktanaka@redhat.com>
+by K.Tanaka <ktanaka@redhat.com> / 2018.10.21 / Rev 1.0
 
 == OpenShift Onlineの利用
 
