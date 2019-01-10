@@ -1,10 +1,10 @@
 :toc: left
 :sectnums:
-:toclevels: 1
+:toclevels: 2
 
 = OpenShiftデモ&ハンズオン
 
-by K.Tanaka <ktanaka@redhat.com> / 2018.10.21 / Rev 1.0.1
+by K.Tanaka <ktanaka@redhat.com> / 2018.10.21 / Rev 1.0.2
 
 == OpenShift Onlineの利用
 
