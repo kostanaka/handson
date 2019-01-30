@@ -431,12 +431,53 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_openshift_onlineの利用">1. OpenShift Onlineの利用</a></li>
-<li><a href="#_既存イメージのデプロイ">2. 既存イメージのデプロイ</a></li>
-<li><a href="#_シンプルなs2i体験">3. シンプルなS2I体験</a></li>
-<li><a href="#_webhook連携による自動ビルド">4. Webhook連携による自動ビルド</a></li>
-<li><a href="#_デプロイコンフィグの設定確認">5. デプロイコンフィグの設定確認</a></li>
-<li><a href="#_おまけの演習">6. おまけの演習</a></li>
+<li><a href="#_openshift_onlineの利用">1. OpenShift Onlineの利用</a>
+<ul class="sectlevel2">
+<li><a href="#_webコンソールへのログイン">1.1. Webコンソールへのログイン</a></li>
+<li><a href="#_cliでのログイン_オプション">1.2. CLIでのログイン(オプション)</a></li>
+<li><a href="#_プロジェクトの作成">1.3. プロジェクトの作成</a></li>
+</ul>
+</li>
+<li><a href="#_既存イメージのデプロイ">2. 既存イメージのデプロイ</a>
+<ul class="sectlevel2">
+<li><a href="#_プロジェクトにおいて既存イメージをデプロイしてみる">2.1. プロジェクトにおいて既存イメージをデプロイしてみる</a></li>
+<li><a href="#_デプロイ状況の確認">2.2. デプロイ状況の確認</a></li>
+<li><a href="#_手動でのスケールアウト操作">2.3. 手動でのスケールアウト操作</a></li>
+<li><a href="#_routeの作成とアプリの動作確認">2.4. Routeの作成とアプリの動作確認</a></li>
+<li><a href="#_環境のクリーンアップ">2.5. 環境のクリーンアップ</a></li>
+</ul>
+</li>
+<li><a href="#_シンプルなs2i体験">3. シンプルなS2I体験</a>
+<ul class="sectlevel2">
+<li><a href="#_github_com上でのソースリポジトリ準備">3.1. github.com上でのソースリポジトリ準備</a></li>
+<li><a href="#_s2iによるphp_exampleアプリのビルドと確認">3.2. S2Iによるphp-exampleアプリのビルドと確認</a></li>
+</ul>
+</li>
+<li><a href="#_webhook連携による自動ビルド">4. Webhook連携による自動ビルド</a>
+<ul class="sectlevel2">
+<li><a href="#_php_exampleのビルドコンフィグの設定確認">4.1. php-exampleのビルドコンフィグの設定確認</a></li>
+<li><a href="#_github_com上のphp_exampleリポジトリの設定変更">4.2. github.com上のphp-exampleリポジトリの設定変更</a></li>
+<li><a href="#_ソースコードの編集とコミット">4.3. ソースコードの編集とコミット</a></li>
+<li><a href="#_自動ビルド状況の確認">4.4. 自動ビルド状況の確認</a></li>
+<li><a href="#_アプリの動作確認">4.5. アプリの動作確認</a></li>
+</ul>
+</li>
+<li><a href="#_デプロイコンフィグの設定確認">5. デプロイコンフィグの設定確認</a>
+<ul class="sectlevel2">
+<li><a href="#_デフォルト状態_rolling_でのデプロイ処理確認">5.1. デフォルト状態(Rolling)でのデプロイ処理確認</a></li>
+<li><a href="#_デプロイストラテジーの変更_rolling_recreate">5.2. デプロイストラテジーの変更(Rolling→Recreate)</a></li>
+<li><a href="#_recreateストラテジーの確認">5.3. Recreateストラテジーの確認</a></li>
+</ul>
+</li>
+<li><a href="#_おまけの演習">6. おまけの演習</a>
+<ul class="sectlevel2">
+<li><a href="#_parksmap_katacodaのデプロイ">6.1. parksmap-katacodaのデプロイ</a></li>
+<li><a href="#_nationalparks_katacodaをs2iでデプロイ">6.2. nationalparks-katacodaをS2Iでデプロイ</a></li>
+<li><a href="#_nationalparks_katacoda_のデプロイ設定変更">6.3. nationalparks-katacoda のデプロイ設定変更</a></li>
+<li><a href="#_nationalparks_katacodaの編集">6.4. nationalparks-katacodaの編集</a></li>
+<li><a href="#_動作確認">6.5. 動作確認</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -444,7 +485,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>by K.Tanaka &lt;<a href="mailto:ktanaka@redhat.com">ktanaka@redhat.com</a>&gt; / 2018.10.21 / Rev 1.0.1</p>
+<p>by K.Tanaka &lt;<a href="mailto:ktanaka@redhat.com">ktanaka@redhat.com</a>&gt; / 2018.10.21 / Rev 1.0.2</p>
 </div>
 </div>
 </div>
@@ -1065,7 +1106,7 @@ CatalogにあるPythonのS2Iを使って、デプロイしてください</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-10-21 00:19:05 JST
+Last updated 2019-01-10 10:29:44 JST
 </div>
 </div>
 </body>
