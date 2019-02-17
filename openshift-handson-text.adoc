@@ -4,28 +4,27 @@
 
 = OpenShiftデモ&ハンズオン
 
-by K.Tanaka <ktanaka@redhat.com> / 2018.10.21 / Rev 1.0.2
+by K.Tanaka <ktanaka@redhat.com> / 2019.2.19 / Rev 1.1.0
 
 == OpenShift Onlineの利用
 
 === Webコンソールへのログイン
 
-* webブラウザにて、OpenShift Onlineのwelcomeメールに記載のあったURLへアクセス(おそらく以下のいずれか)
+* webブラウザにて、講師から指示のあったURLへアクセス (XXXXXの部分は指示のあった適切なものに置き換えること)
 ====
-https://console.starter-us-east-1.openshift.com +
-https://console.starter-us-west-1.openshift.com
+https://master.XXXXX.openshiftworkshop.com
 ====
-※本書では便宜上、上側のURL(starter-us-east-1)を記載する。各自、適宜読み替えて使うこと。
+※本書では便宜上、上に記載したURL(master.XXXXX.openshiftworkshop.com)を記載する。各自、適宜読み替えて使うこと。
 
-* 事前に申請したRed Hatアカウントとパスワードを入力
+* 講師から指示のあったアカウントとパスワードを入力してログイン
 
 === CLIでのログイン(オプション)
 
-※CDKなどを導入して、ocコマンドを利用できる人向け
+ocコマンドを利用できる人向け
 ----
-$ oc login https://console.starter-us-east-1.openshift.com
-Authentication required for https://console.starter-us-east-1.openshift.com:443 (openshift)
-Username: ktanaka@redhat.com
+$ oc login https://master.XXXXX.openshiftworkshop.com
+Authentication required for https://master.XXXXX.openshiftworkshop.com:443 (openshift)
+Username: user1
 Password: (パスワードを入力)
 Login successful.
 ----
@@ -34,12 +33,13 @@ Login successful.
 
 * Webコンソールの右上にある [+ Create Project]ボタンから、任意の名前のプロジェクトを作成(英小文字、数字、ダッシュ(-)のみが利用可能)
 * プロジェクト名はOpenShift Online (Free)上でユニークである必要があるので注意
-* (Free環境では)作成にしばらく時間がかかるので気長に待つこと
+  - (例) user1-project1
+* (OpenShift Online (free)環境では)作成にしばらく時間がかかるので気長に待つこと
 * CLIからであれば、以下のコマンドを実行
 
 ----
 $ oc new-project (プロジェクト名)
-Now using project "(プロジェクト名)" on server "https://console.starter-us-west-1.openshift.com:443".
+Now using project "(プロジェクト名)" on server "https://master.XXXXX.openshiftworkshop.com:443".
 
 You can add applications to this project with the 'new-app' command. For example, try:
 
