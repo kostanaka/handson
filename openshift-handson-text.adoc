@@ -14,7 +14,7 @@ by K.Tanaka <ktanaka@redhat.com> / 2019.2.19 / Rev 1.1.0
 ====
 https://master.XXXXX.openshiftworkshop.com
 ====
-※本書では便宜上、上に記載したURL(master.XXXXX.openshiftworkshop.com)を記載する。各自、適宜読み替えて使うこと。
+※本書では便宜上、上に記載したURL(https://master.XXXXX.openshiftworkshop.com)を記載する。各自、適宜読み替えて使うこと。
 
 * 講師から指示のあったアカウントとパスワードを入力してログイン
 
