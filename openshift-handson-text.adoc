@@ -187,6 +187,9 @@ https://github.com/(自身のアカウント名)/php-example
 
 === デフォルト状態(Rolling)でのデプロイ処理確認
 
+動きがわかりやすいように、php-exampleのPod数を2または3に変更します。
+※OpenShift Online (Free) ではquota制限のため、Podを2以上にした状態では再デプロイ処理が止まってしまいますので、1のままにしておいて下さい。
+
 * [Deploy]ボタンをクリック後、すぐに "Applications"→"Pods"へ
 * 以下の一連の動作を確認
   - deploy処理用のPod起動
@@ -195,7 +198,6 @@ https://github.com/(自身のアカウント名)/php-example
 
 上記は、Podを2つ以上にした状態で実行するとわかりやすいです。
 CDK環境などで実行している方は、あらかじめPod数を増やした状態で実行して下さい。
-OpenShift Online (Free) ではquota制限のため、Podを2にした状態では再デプロイ処理が止まってしまうので注意が必要です。
 
 === デプロイストラテジーの変更(Rolling→Recreate)
 
