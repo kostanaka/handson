@@ -4,7 +4,7 @@
 
 = OpenShiftデモ&ハンズオン
 
-by K.Tanaka <ktanaka@redhat.com> / 2019.2.19 / Rev 1.1.1
+by K.Tanaka <ktanaka@redhat.com> / 2019.2.19 / Rev 1.1.2
 
 == OpenShift Onlineの利用
 
@@ -211,7 +211,7 @@ CDK環境などで実行している方は、あらかじめPod数を増やし�
     type: Recreate
 ----
 * 変更した部分が上記のようになっていることを確認して[Save]
-
+  
 === Recreateストラテジーの確認
 
 * Overviewから、php-exampleのPod数を2に増やす
@@ -245,7 +245,7 @@ https://github.com/openshift-roadshow/nationalparks-katacoda
 
 === nationalparks-katacoda のデプロイ設定変更
 
-* 正常デプロイ後、デプロイストラテジーを Recreate に変更 (※OpenShift Onlineのリソース制限を回避するための作業)
+* OpenShift Online (free)を利用している人は、リソース制限を回避するためにデプロイストラテジーを Recreate に変更しておく
 * GitHub上のリポジトリへのcommitで、nationalparks-katacodaが再ビルドされるように、Webhookを設定
 
 === nationalparks-katacodaの編集
