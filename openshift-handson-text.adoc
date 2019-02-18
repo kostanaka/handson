@@ -210,6 +210,7 @@ CDK環境などで実行している方は、あらかじめPod数を増やし�
     resources: {}
     type: Recreate
 ----
+* 変更した部分が上記のようになっていることを確認して[Save]
 
 === Recreateストラテジーの確認
 
