@@ -4,7 +4,7 @@
 
 = OpenShiftデモ&ハンズオン
 
-by K.Tanaka <ktanaka@redhat.com> / 2019.2.19 / Rev 1.1.0
+by K.Tanaka <ktanaka@redhat.com> / 2019.2.19 / Rev 1.1.1
 
 == OpenShift Onlineの利用
 
@@ -32,9 +32,9 @@ Login successful.
 === プロジェクトの作成
 
 * Webコンソールの右上にある [+ Create Project]ボタンから、任意の名前のプロジェクトを作成(英小文字、数字、ダッシュ(-)のみが利用可能)
-* プロジェクト名はOpenShift Online (Free)上でユニークである必要があるので注意
+* プロジェクト名はOpenShiftクラスタ内でユニークである必要があるので、ユーザ名を入れるなどして工夫すること
   - (例) user1-project1
-* (OpenShift Online (free)環境では)作成にしばらく時間がかかるので気長に待つこと
+* (特にOpenShift Online (free)環境では)作成にしばらく時間がかかるので気長に待つこと
 * CLIからであれば、以下のコマンドを実行
 
 ----
